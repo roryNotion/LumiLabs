@@ -1,9 +1,11 @@
 from fastapi import FastAPI
-from app.auth import authenticate_user, create_access_token
-from app.tasks import tasks_router
-from app.teams import teams_router
+from .auth import router as auth_router
+from .tasks import router as task_router
+from .teams import router as team_router
 
 app = FastAPI()
 
-app.include_router(tasks_router, prefix="/tasks", tags=["Tasks"])
-app.include_router(teams_router, prefix="/teams", tags=["Teams"])
+# Include routers for different API functionality
+app.include_router(auth_router, prefix="/auth", tags=["auth"])
+app.include_router(task_router, prefix="/tasks", tags=["tasks"])
+app.include_router(team_router, prefix="/teams", tags=["teams"])
